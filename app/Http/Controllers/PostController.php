@@ -19,8 +19,7 @@ class PostController extends Controller
     public function index()
     {
         //show all post with pagination
-        $posts = Post::paginate(10);
-        //return $posts->user; 
+        $posts = Post::paginate(10); 
         return view('posts')->with(['all_posts' => $posts]);
 
     }
@@ -87,8 +86,7 @@ class PostController extends Controller
     {
         //show details of single post
         $post_details = Post::find($id);
-        //pull list of comment attarch to this post
-       // $post_comment = Comment::find($id);
+        
         return view('single_details')->with(['post_details' => $post_details]);
     }
 

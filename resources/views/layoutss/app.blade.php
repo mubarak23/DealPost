@@ -11,19 +11,19 @@
     <title>Post And Video Upload</title>
 
 
-    @include('includes.styles')
+    @include('includess.styles')
     
   </head>
 
   <body>
 
-    @include('includes.nav')
+    @include('includess.nav')
 
       <div id='app'>
         @yield('content')
       </div>
   
 
-   @include('includes.js') 
+   @include('includess.js') 
   </body>
 </html>

@@ -46,7 +46,7 @@ class VideoController extends Controller
         //collect user data and validate it
         //send the validate data to store method
         $data = $request->all();
-        //return $request->file('video');
+        
         //set validation rules
             $validatedData = $request->validate([
                 "name"     => "required|min:5",
