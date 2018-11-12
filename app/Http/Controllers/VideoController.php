@@ -79,7 +79,7 @@ class VideoController extends Controller
      * @author  Mubarak Aminu <mubarakaminu340@gmail.com> 
      * @return \Illuminate\Http\Response
      */
-    public function store($data, $filename)
+    public function store($data)
     {
         
     }
@@ -93,10 +93,8 @@ class VideoController extends Controller
     public function show($id)
     {
         //show details of single post
-        $video_details = video::find($id);
-        //pull list of comment attarch to this post
-        $video_comment = VideoComment::where('video_id', $id)->get();
-        return view('single_details')->with(['video_details' => $video_details, 'comment' => $video_comment]);
+        $video_details = Video::find($id);
+        return view('single_video')->with(['post_details' => $video_details]);
     }
 
     /**

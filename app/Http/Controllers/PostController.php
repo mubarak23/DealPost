@@ -19,7 +19,7 @@ class PostController extends Controller
     public function index()
     {
         //show all post with pagination
-        $posts = Post::all();
+        $posts = Post::paginate(10);
         //return $posts->user; 
         return view('posts')->with(['all_posts' => $posts]);
 
