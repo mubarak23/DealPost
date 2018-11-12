@@ -19,16 +19,29 @@
 		    <hr>
 		    <h3>Drop Comment Here</h3>
 		    <form action="/process_comment" enctype="multipart/form-data" method="post">
-
-		    <input type="hidden" name="{{ $post_details->id }}" class="form-control">
+		    	{{ csrf_field() }}
+		    <input type="hidden" name="post_id" value="{{ $post_details->id}}" class="form-control">
+		    <input type="hidden" name="user_id" value="1" class="form-control">
 		    	<div class="form-group">
 		    		<label>Email Address</label>
-		    		<input type="text" name="email" class="form-control">	
+		    		<input type="text" name="email" value="{{ old('email') }}" class="form-control">
+		    		@if ($errors->has('email'))
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $errors->first('email') }}</strong>
+                </span>
+                @endif	
 		    	</div>
 
 		    	<div class="form-group">
 		    		<label>Comment</label>
-		    		<textarea type="text" name="comment" class="form-control"></textarea>	
+		    		<textarea type="text" name="comment" value="{{ old('body') }}" class="form-control">
+		    		</textarea>
+		    			@if ($errors->has('comment'))
+                <span class="invalid-feedback" role="alert">
+                  <strong>{{ $errors->first('comment') }}</strong>
+                </span>
+                @endif
+		    			
 		    	</div>
 		    	<input type="submit" value="Post Cooment" class="btn btn-primary">
 		    </form>

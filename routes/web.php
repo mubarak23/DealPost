@@ -33,7 +33,7 @@ Route::post('process_edit/{id}', 'PostController@update');
 Route::get('/delete/{id}', 'PostController@destroy');
 
 //post comment
-Route::post('/post_comment', 'PostCommentController@store');
+Route::post('/process_comment', 'CommentController@create');
 
 
 //Video Route
