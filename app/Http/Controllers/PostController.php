@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Post;
 use App\User;
-use App\PostComment;
+use App\Comment;
 use Illuminate\Http\Request;
 use DB;
 use Validator;
@@ -88,8 +88,8 @@ class PostController extends Controller
         //show details of single post
         $post_details = Post::find($id);
         //pull list of comment attarch to this post
-        $post_comment = PostComment::where('post_id', $id)->get();
-        return view('single_details')->with(['post_details' => $post_details, 'comment' => $post_comment]);
+       // $post_comment = Comment::find($id);
+        return view('single_details')->with(['post_details' => $post_details]);
     }
 
     /**

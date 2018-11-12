@@ -16,6 +16,7 @@
 			<div class="wall">
 		    <h3>{{ $post_details->title}}</h3>
 		    <h4>{{ $post_details->body}}</h4>
+		    <h6>Created By: {{ $post_details->user->name }}</h6>
 		    <hr>
 		    <h3>Drop Comment Here</h3>
 		    <form action="/process_comment" enctype="multipart/form-data" method="post">
@@ -30,6 +31,15 @@
                   <strong>{{ $errors->first('email') }}</strong>
                 </span>
                 @endif	
+		    	</div>
+		    	<hr>
+		    	<div>
+		    		<h5>All Comment</h5>
+		    		@foreach( $post_details->comment as $comment)
+		    		<h3>{{ $comment->email }}</h3>
+		    		<h4>{{ $comment->comment}}</h4>
+		    		@endforeach()
+		    <hr>
 		    	</div>
 
 		    	<div class="form-group">
