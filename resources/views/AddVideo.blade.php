@@ -4,32 +4,15 @@
 <div class="container">
     <div class="row">
         <div class="col-md-6">
-             <h1>{{ $title }}</h1>
+             <h1>Add Video</h1>
         <form action="/process_video" enctype="multipart/form-data" method="post">
             {{ csrf_field() }}
             <div class="form-group">
-                <label>Name</label>
-                
-                <input type="text" name="name" value="{{ old('name') }}" placeholder="Enter Name Here" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}">
-                @if ($errors->has('name'))
-                <span class="invalid-feedback" role="alert">
-                  <strong>{{ $errors->first('name') }}</strong>
-                </span>
-                @endif
-            </div>
-
-            <div class="form-group">
-                <label>Email</label>
-                <input type="text" name="email" value="{{ old('email') }}" placeholder="Enter Email Address Here" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}">
-                @if ($errors->has('email'))
-                <span class="invalid-feedback" role="alert">
-                  <strong>{{ $errors->first('email') }}</strong>
-                </span>
-                @endif
+                <input type="hidden" name="user_id" value="1">
             </div>
             <div class="form-group">
-                <label>Post Title</label>
-                <input type="text" name="title" value="{{ old('title') }}" placeholder="Enter Post Title Here" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" >
+                <label>Video Title</label>
+                <input type="text" name="title" value="{{ old('title') }}" placeholder="Enter Video Title Here" class="form-control{{ $errors->has('title') ? ' is-invalid' : '' }}" >
                 @if ($errors->has('title'))
                 <span class="invalid-feedback" role="alert">
                   <strong>{{ $errors->first('title') }}</strong>

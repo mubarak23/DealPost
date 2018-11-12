@@ -31,6 +31,7 @@ class User extends Authenticatable
     public function post(){
         return $this->hasMany(Post::class);
     }
+    
     public function video(){
         return $this->hasMany(Post::class);
     }
