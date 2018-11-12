@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Post;
+use App\User;
 use App\PostComment;
 use Illuminate\Http\Request;
 use DB;
@@ -18,7 +19,8 @@ class PostController extends Controller
     public function index()
     {
         //show all post with pagination
-        $posts = Post::paginate(10);
+        $posts = Post::all();
+        //return $posts->user; 
         return view('posts')->with(['all_posts' => $posts]);
 
     }
@@ -45,18 +47,15 @@ class PostController extends Controller
         $data = $request->all();
         //set validation rules
             $validatedData = $request->validate([
-                "name"     => "required|min:5",
-                "email"  => "required",
                 "title"  => "required|min:5",
                 "body"  => "required|min:5|max:500"
                 ]);
                 $add_post = new Post();
-                $add_post->name = $data['name'];
-                $add_post->email = $data['email'];
+                $add_post->user_id = $data['user_id'];
                 $add_post->title = $data['title'];
                 $add_post->body = $data['body'];
                 $add_post->save();
-                if($process_store){ 
+                if($add_post){ 
                     //return home
                     return redirect()->route('posts')->with('status', 'Add Post Successfully');
                 }else{

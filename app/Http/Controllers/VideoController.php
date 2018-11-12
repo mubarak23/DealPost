@@ -51,11 +51,9 @@ class VideoController extends Controller
             $validatedData = $request->validate([
                 "name"     => "required|min:5",
                 "email"  => "required",
-                "title"  => "required|min:5",
-                "video"  => "required|min:5|max:500"
+                "title"  => "required|min:5"
                 ]);
             //process video to Storage Location
-             
             if ($request->hasFile('video')) {
             $request->file('video');
             $filename = $request->image->getClientOriginalName();
@@ -68,9 +66,7 @@ class VideoController extends Controller
             $add_video->title = $data['title'];
             $add_video->video_name = $filename;
             $add_video->save();
-
             return redirect()->route('video')->with('status', 'Add Video Successfully');
-
         }else{
             //send back an error message
             return redirect()->back()->withInput()->with('status', 'Unable to Upload Video at This Time');
@@ -97,11 +93,10 @@ class VideoController extends Controller
     public function show($id)
     {
         //show details of single post
-        $title = "Single Video Details";
         $video_details = video::find($id);
         //pull list of comment attarch to this post
         $video_comment = VideoComment::where('video_id', $id)->get();
-        return view('single_details')->with(['title' => $title, 'video_details' => $video_details, 'comment' => $video_comment]);
+        return view('single_details')->with(['video_details' => $video_details, 'comment' => $video_comment]);
     }
 
     /**
@@ -113,9 +108,8 @@ class VideoController extends Controller
     public function edit($id)
     {
          //show a specfic post to edit
-        $title = 'Edit Video';
         $video = Video::find($id);
-        return view('edit_video')->with(['video' => $video, 'title' => $title]);
+        return view('edit_video')->with(['video' => $video]);
     }
 
     /**
@@ -127,24 +121,14 @@ class VideoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
         //pull that particular post using it id
         //update it's content
         $data = $request->all();
-        DB::beginTransaction();
-        try{
             //find the post
-            $edit_post = Post::find($id);
-            if(!empty($data['name'])){
-                $edit_post->name = $data['name'];
-             }
-             if(!empty($data['email'])){
-                 $edit_post->email = $data['email'];   
-             }
-             if(!empty($data['title'])){
-                 $edit_post->title = $data['title'];   
-             }
-             
+            $edit_post = Video::find($id);
+            $edit_video->name = $data['name'];
+            $edit_video->email = $data['email'];
+            $edit_video = $data['title'];
              if($edit_post->save()){
                 DB::commit();
                 return redirect()->route('videos')->with('status', 'Edit Video Successfully');
@@ -153,10 +137,7 @@ class VideoController extends Controller
                 return redirect()->back()->withInput()->with('status', 'Unable to Edit Video at This Time');
              }
 
-        }catch(Exception $e){
-            throw $e;
-            DB::rollback();
-        }
+        
     }
 
     /**
@@ -165,7 +146,7 @@ class VideoController extends Controller
      * @param  \App\video  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(video $video)
+    public function destroy($id)
     {
         //
         //pull the particular post and delete it

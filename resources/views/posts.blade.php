@@ -15,6 +15,7 @@
 			@foreach($all_posts as $post)
 			<div class="wall">
 		    <h3><a href="/post/{{$post->id}}">{{ $post->title}}</a></h3>
+		    <p>Created By: {{ $post->user->name }}</p>
 		    <hr>
 		    <a href="/edit_post/{{ $post->id }}" class="btn btn-warning">Edit</a>
 		    <a href="/delete/{{ $post->id }}"  class="btn btn-danger">Delete</a>
